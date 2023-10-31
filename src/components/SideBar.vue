@@ -1,24 +1,12 @@
 <template>
-  <ul class="sidenav app-sidenav open">
-    <RouterLink
-      tag="li"
-      to="/"
-      exact-active-class="active"
-      active-class="active"
-    >
-      <a href="#" class="waves-effect waves-orange pointer">Счет</a>
-    </RouterLink>
+  <ul class="sidenav app-sidenav" :class="{ open: menuOpen }">
     <li>
-      <router-link to="/" class="waves-effect waves-orange pointer" exact
+      <router-link to="/" class="waves-effect waves-orange pointer"
         >Счет</router-link
       >
     </li>
     <li>
-      <router-link
-        active-class="active"
-        to="/history"
-        class="waves-effect waves-orange pointer"
-      >
+      <router-link to="/history" class="waves-effect waves-orange pointer">
         История
       </router-link>
     </li>
@@ -41,8 +29,13 @@
 </template>
 
 <script>
-import { RouterLink } from "vue-router";
 export default {
+  props: {
+    menuOpen: {
+      type: Boolean,
+      required: true,
+    },
+  },
   name: "side-bar",
 };
 </script>

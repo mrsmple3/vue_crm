@@ -44,10 +44,10 @@ const routes = [
     component: () => import("@/views/RecordView.vue"),
   },
   {
-    path: "/register",
-    name: "register",
+    path: "/registrate",
+    name: "registrate",
     meta: { layout: "empty" },
-    component: () => import("@/views/RegisterView.vue"),
+    component: () => import("@/views/RegistrateView.vue"),
   },
 ];
 

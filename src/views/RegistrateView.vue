@@ -1,31 +1,42 @@
 <template>
-  <form class="card auth-card" @submit.prevent="submitHandler">
+  <form class="card auth-card" @submit.prevent="onClick">
     <div class="card-content">
       <span class="card-title">Домашняя бухгалтерия</span>
       <div class="input-field">
-        <input id="email" type="text" v-model.trim="email" />
+        <input id="email" type="text" v-model="email" />
         <label for="email">Email</label>
         <small class="helper-text invalid" v-if="v$.email.$error">Email*</small>
       </div>
       <div class="input-field">
-        <input id="password" type="password" v-model.trim="password" />
+        <input id="password" type="password" v-model="password" />
         <label for="password">Пароль</label>
         <small class="helper-text invalid" v-if="v$.password.$error"
           >Password* должен содержать {{ password.length }}/6
         </small>
       </div>
+      <div class="input-field">
+        <input id="name" type="text" v-model="name" />
+        <label for="name">Имя</label>
+        <small class="helper-text invalid" v-if="v$.name.$error">Name*</small>
+      </div>
+      <p>
+        <label>
+          <input type="checkbox" v-model="agree" />
+          <span>С правилами согласен</span>
+        </label>
+      </p>
     </div>
     <div class="card-action">
       <div>
         <button class="btn waves-effect waves-light auth-submit" type="submit">
-          Войти
+          Зарегистрироваться
           <i class="material-icons right">send</i>
         </button>
       </div>
 
       <p class="center">
-        Нет аккаунта?
-        <router-link to="/registrate">Зарегистрироваться</router-link>
+        Уже есть аккаунт?
+        <router-link to="/login">Войти!</router-link>
       </p>
     </div>
   </form>
@@ -36,11 +47,13 @@ import { email, required, minLength } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 
 export default {
-  name: "login",
+  name: "registrate-view",
   data() {
     return {
       email: "",
       password: "",
+      name: "",
+      agree: false,
     };
   },
   setup() {
@@ -51,17 +64,21 @@ export default {
     return {
       email: { required, email },
       password: { required, minLength: minLength(6) },
+      name: { required },
+      agree: { checked: (v) => v },
     };
   },
   methods: {
-    submitHandler() {
-      console.log(password);
+    onClick() {
       this.v$.$touch();
       if (this.v$.$error) return;
+
       const formData = {
         email: this.email,
         password: this.password,
+        name: this.name,
       };
+
       this.$router.push("/");
     },
   },

@@ -7,7 +7,6 @@ import "materialize-css/dist/js/materialize.min";
 import components from "@/components/index";
 
 const app = createApp(App);
-
 components.forEach((component) => {
   app.component(component.name, component);
 });
