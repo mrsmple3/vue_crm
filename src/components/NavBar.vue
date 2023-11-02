@@ -40,6 +40,7 @@
 
 <script>
 import getCurrentDate from "@/functions/CurrentDate";
+
 export default {
   name: "nav-bar",
   data() {

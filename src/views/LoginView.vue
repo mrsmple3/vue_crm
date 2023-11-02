@@ -34,6 +34,8 @@
 <script>
 import { email, required, minLength } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import messages from "@/utils/messages";
+import { useStore } from "vuex";
 
 export default {
   name: "login",
@@ -41,6 +43,7 @@ export default {
     return {
       email: "",
       password: "",
+      store: useStore(),
     };
   },
   setup() {
@@ -55,15 +58,20 @@ export default {
   },
   methods: {
     submitHandler() {
-      console.log(password);
       this.v$.$touch();
       if (this.v$.$error) return;
       const formData = {
         email: this.email,
         password: this.password,
       };
+      this.store.dispatch("login", formData);
       this.$router.push("/");
     },
+  },
+  mounted() {
+    if (messages[this.$route.query.message]) {
+      this.$message(messages[this.$route.query.message]);
+    }
   },
 };
 </script>

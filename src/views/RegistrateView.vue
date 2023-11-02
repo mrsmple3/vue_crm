@@ -45,6 +45,7 @@
 <script>
 import { email, required, minLength } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
+import { useStore } from "vuex";
 
 export default {
   name: "registrate-view",
@@ -54,6 +55,7 @@ export default {
       password: "",
       name: "",
       agree: false,
+      store: useStore(),
     };
   },
   setup() {
@@ -76,9 +78,8 @@ export default {
       const formData = {
         email: this.email,
         password: this.password,
-        name: this.name,
       };
-
+      this.store.dispatch("register", formData);
       this.$router.push("/");
     },
   },
