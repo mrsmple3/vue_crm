@@ -57,15 +57,17 @@ export default {
     };
   },
   methods: {
-    submitHandler() {
+    async submitHandler() {
       this.v$.$touch();
       if (this.v$.$error) return;
       const formData = {
         email: this.email,
         password: this.password,
       };
-      this.store.dispatch("login", formData);
-      this.$router.push("/");
+      try {
+        await this.store.dispatch("login", formData);
+        this.$router.push("/");
+      } catch (error) {}
     },
   },
   mounted() {

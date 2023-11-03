@@ -1,11 +1,11 @@
 import { createStore } from "vuex";
-import { auth } from "@/firebase";
+import { auth, database } from "@/firebase";
+import { ref, set } from "firebase/database";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import router from "@/router";
 
 export default createStore({
   state: {
@@ -27,26 +27,29 @@ export default createStore({
         await signInWithEmailAndPassword(auth, email, password);
       } catch (error) {
         alert(error.message);
-        return;
+        throw error;
       }
-      console.log(auth.currentUser);
+
       commit("SET_USER", auth.currentUser);
     },
 
-    async register({ commit }, details) {
-      const { email, password } = details;
+    async register({ commit, dispatch }, details) {
+      const { email, password, name } = details;
       try {
         await createUserWithEmailAndPassword(auth, email, password);
+        const uid = await dispatch("getUid");
+        await set(ref(database, `/users/${uid}/info/`), { bill: 10000, name });
       } catch (error) {
         alert(error.message);
-        return;
+        throw error;
       }
-      console.log(auth.currentUser);
       commit("SET_USER", auth.currentUser);
+    },
+    getUid() {
+      return this.state.user ? this.state.user.uid : null;
     },
     async logout({ commit }) {
       await signOut(auth);
-      console.log(LogOut);
       commit("CLEAR_USER");
     },
     // fetch({ commit }) {
