@@ -9,11 +9,19 @@
 <script>
 import EmptyLayout from "@/layouts/EmptyLayout.vue";
 import MainLayout from "@/layouts/MainLayout.vue";
-
+import { onBeforeMount } from "vue";
+import { useStore } from "vuex";
 export default {
   components: {
     MainLayout,
     EmptyLayout,
+  },
+  setup() {
+    const store = useStore();
+
+    onBeforeMount(() => {
+      store.dispatch("initAuth");
+    });
   },
   computed: {
     layout() {

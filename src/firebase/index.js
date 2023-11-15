@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCCV-3xjblsAFc-9olGM0apC8DEVvn5CaU",
   authDomain: "vue-crm-2edf3.firebaseapp.com",
@@ -15,4 +16,4 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
 
-export { auth, database };
+export { auth, database, app };

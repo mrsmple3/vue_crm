@@ -11,7 +11,11 @@
         <span class="helper-text invalid" v-if="v$.$error">Name*</span>
       </div>
 
-      <button class="btn waves-effect waves-light" type="submit">
+      <button
+        class="btn waves-effect waves-light"
+        type="submit"
+        @click="changeName"
+      >
         Обновить
         <i class="material-icons right">send</i>
       </button>
@@ -46,6 +50,7 @@ export default {
       const formData = {
         name: this.name,
       };
+      this.$store.getters.info.name = this.name;
       window.location.reload();
     },
   },
