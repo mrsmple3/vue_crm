@@ -12,16 +12,22 @@
     </thead>
 
     <tbody>
-      <tr>
-        <td>{{ counter }}</td>
-        <td>1212</td>
-        <td>{{ date }}</td>
-        <td>name</td>
+      <tr v-for="(record, index) in records" :key="record.id">
+        <td>{{ index + 1 }}</td>
+        <td>{{ $filters.currency(record.amount, "RUB") }}</td>
+        <td>{{ record.date }}</td>
+        <td>{{ record.categoryName }}</td>
         <td>
-          <span class="white-text badge red">Расход</span>
+          <span class="white-text badge" :class="record.typeClass">
+            {{ record.typeText }}</span
+          >
         </td>
         <td>
-          <button class="btn-small btn">
+          <button
+            v-tooltip="'Посмотреть запись'"
+            class="btn-small btn"
+            @click="$router.push('/detail/' + record.categoryId)"
+          >
             <i class="material-icons">open_in_new</i>
           </button>
         </td>
@@ -33,37 +39,11 @@
 <script>
 export default {
   name: "history-component",
-  data() {
-    return {
-      loading: true,
-      counter: 1,
-      record: [],
-      date: [],
-      categories: [],
-      type: [],
-    };
-  },
-  async mounted() {
-    this.records = await this.$store.dispatch("fetchRecords");
-    const categories = await this.$store.dispatch("fetchCategories");
-    this.categories = categories.map((cat) => {
-      const spend = records
-        .filter((r) => r.categoryId === cat.id)
-        .filter((r) => r.type === "outcome")
-        .reduce((total, record) => {
-          return (total += +record.amount);
-        }, 0);
-
-      const progressColor = "red" ? this.type === "outcome" : "green";
-      return {
-        ...cat,
-        progressColor,
-        spend,
-      };
-    });
-  },
-  computed: {
-    ...mapGetters(["info"]),
+  props: {
+    records: {
+      type: Array,
+      required: true,
+    },
   },
 };
 </script>

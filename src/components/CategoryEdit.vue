@@ -104,7 +104,7 @@ export default {
       } catch (error) {}
     },
   },
-  destroyed() {
+  unmounted() {
     if (this.select || this.select.destroy) {
       this.select.destroy();
     }
