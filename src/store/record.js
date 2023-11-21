@@ -1,5 +1,5 @@
 import { database } from "@/firebase";
-import { ref, push, get } from "firebase/database";
+import { ref, push, get, child } from "firebase/database";
 
 export default {
   actions: {
@@ -7,7 +7,6 @@ export default {
       try {
         const uid = await dispatch("getUid");
         return await push(ref(database, `/users/${uid}/records/`), record);
-        console.log("REcord");
       } catch (error) {
         commit("SET_ERROR", error);
         throw error;

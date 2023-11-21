@@ -74,6 +74,7 @@
 import { required, minValue } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import { mapGetters } from "vuex";
+import getCurrentDate from "@/functions/CurrentDate";
 export default {
   name: "record-view",
   data() {
@@ -130,7 +131,7 @@ export default {
             amount: this.amount,
             description: this.description,
             type: this.type,
-            date: new Date().toJSON(),
+            date: getCurrentDate("datetime"),
           });
           const bill =
             this.type === "income"

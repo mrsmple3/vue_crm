@@ -6,6 +6,8 @@ import LoaderComponent from "@/components/LoaderComponent.vue";
 import CategoryCreate from "@/components/CategoryCreate.vue";
 import CategoryEdit from "@/components/CategoryEdit.vue";
 import HistoryComponent from "@/components/HistoryComponent.vue";
+import PaginateComponent from "vuejs-paginate";
+
 export default [
   SideBar,
   NavBar,
@@ -15,4 +17,5 @@ export default [
   CategoryCreate,
   CategoryEdit,
   HistoryComponent,
+  PaginateComponent,
 ];

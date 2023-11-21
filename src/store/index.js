@@ -124,6 +124,32 @@ export default createStore({
         throw error;
       }
     },
+    async fetchCategoryById({ commit, dispatch }, id) {
+      try {
+        const uid = await dispatch("getUid");
+        const snapshot = await get(
+          child(ref(database, `/users/${uid}/categories/`), id)
+        );
+        const category = snapshot.val() || {};
+        return { ...category, id };
+      } catch (error) {
+        commit("SET_ERROR", error);
+        throw error;
+      }
+    },
+    async fetchRecordById({ commit, dispatch }, id) {
+      try {
+        const uid = await dispatch("getUid");
+        const snapshot = await get(
+          child(ref(database, `/users/${uid}/records/`), id)
+        );
+        const record = snapshot.val() || {};
+        return { ...record, id };
+      } catch (error) {
+        commit("SET_ERROR", error);
+        throw error;
+      }
+    },
     async updateCategory({ commit, dispatch }, { title, limit, id }) {
       try {
         const uid = await dispatch("getUid");

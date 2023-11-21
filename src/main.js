@@ -1,6 +1,5 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import components from "@/components/index";
@@ -8,6 +7,7 @@ import messagePlugin from "./utils/message.plugin";
 import currency from "./filters/currency.filter";
 import tooltipDirective from "./directives/tooltip.directives";
 import "materialize-css/dist/js/materialize.min";
+import "./registerServiceWorker";
 
 const app = createApp(App);
 components.forEach((component) => {

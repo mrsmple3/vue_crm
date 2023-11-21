@@ -13,6 +13,13 @@
     </p>
     <section v-else>
       <history-component :records="records" />
+      <PaginateComponent
+        :page-count="20"
+        :click-handler="pageChangeHandler"
+        :prev-text="'Prev'"
+        :next-text="'Next'"
+        :container-class="'className'"
+      />
     </section>
   </div>
 </template>
@@ -41,6 +48,9 @@ export default {
       };
     });
     this.loading = false;
+  },
+  methods: {
+    pageChangeHandler() {},
   },
 };
 </script>
