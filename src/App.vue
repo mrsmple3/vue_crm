@@ -18,10 +18,6 @@ export default {
   },
   setup() {
     const store = useStore();
-
-    onBeforeMount(() => {
-      store.dispatch("initAuth");
-    });
   },
   computed: {
     layout() {

@@ -19,7 +19,7 @@
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
-          <ul id="dropdown" class="dropdown-content">
+          <ul id="dropdown" class="dropdown-content" style="min-width: 10em">
             <li>
               <router-link to="/profile" class="black-text">
                 <i class="material-icons">account_circle</i>Профиль
