@@ -2,7 +2,7 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Редактировать</h4>
+        <h4>{{ $filters.locolizeFilter("Edit") }}</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
@@ -12,27 +12,28 @@
               {{ c.title }}
             </option>
           </select>
-          <label>Выберите категорию</label>
+          <label>{{ $filters.locolizeFilter("SelectCategory") }}</label>
         </div>
 
         <div class="input-field">
           <input id="name_edit" type="text" v-model="title" />
-          <label for="name_edit">Название</label>
-          <span class="helper-text invalid" v-if="v$.title.$error"
-            >Введите название</span
-          >
+          <label for="name_edit">{{ $filters.locolizeFilter("Name") }}</label>
+          <span class="helper-text invalid" v-if="v$.title.$error">{{
+            $filters.locolizeFilter("EnterTitle")
+          }}</span>
         </div>
 
         <div class="input-field">
           <input id="limit_edit" type="number" v-model.number="limit" />
-          <label for="limit_edit">Лимит</label>
+          <label for="limit_edit">{{ $filters.locolizeFilter("Limit") }}</label>
           <span class="helper-text invalid" v-if="v$.limit.$error"
-            >Минимальная величина {{ v$.limit.minValue.$params.min }}
+            >{{ $filters.locolizeFilter("MinValue") }}
+            {{ v$.limit.minValue.$params.min }}
           </span>
         </div>
 
         <button class="btn waves-effect waves-light" type="submit">
-          Обновить
+          {{ $filters.locolizeFilter("UpdateBtn") }}
           <i class="material-icons right">send</i>
         </button>
       </form>
@@ -79,7 +80,7 @@ export default {
   validations() {
     return {
       title: { required },
-      limit: { minValue: minValue(100) },
+      limit: { required, minValue: minValue(100) },
     };
   },
   mounted() {
@@ -99,7 +100,7 @@ export default {
           limit: this.limit,
         };
         await this.$store.dispatch("updateCategory", categoryData);
-        this.$message("Категория успешно обновлена");
+        this.$message(this.$filters.locolizeFilter("CategoryUpdated"));
         this.$emit("updated", categoryData);
       } catch (error) {}
     },

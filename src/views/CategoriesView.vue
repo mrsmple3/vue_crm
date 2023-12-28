@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Категории</h3>
+      <h3>{{ $filters.locolizeFilter("Categories") }}</h3>
     </div>
     <section>
       <loader-component v-if="loading" />
@@ -14,7 +14,9 @@
           :key="categories.length + updateCount"
           @updated="updateCategory"
         />
-        <p v-else class="center">Категорий пока нет</p>
+        <p v-else class="center">
+          {{ $filters.locolizeFilter("CategoryNotDeclared") }}
+        </p>
       </div>
     </section>
   </div>
@@ -22,6 +24,9 @@
 
 <script>
 export default {
+  metaInfo: {
+    title: "Categories",
+  },
   data() {
     return {
       categories: [],

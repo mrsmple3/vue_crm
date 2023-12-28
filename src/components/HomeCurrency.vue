@@ -3,14 +3,16 @@
     <div class="card orange darken-3 bill-card">
       <div class="card-content white-text">
         <div class="card-header">
-          <span class="card-title">Курс валют</span>
+          <span class="card-title">{{
+            $filters.locolizeFilter("ExchangeRate")
+          }}</span>
         </div>
         <table>
           <thead>
             <tr>
-              <th>Валюта</th>
-              <th>Курс</th>
-              <th>Дата</th>
+              <th>{{ $filters.locolizeFilter("Currency") }}</th>
+              <th>{{ $filters.locolizeFilter("Rate") }}</th>
+              <th>{{ $filters.locolizeFilter("Date") }}</th>
             </tr>
           </thead>
 

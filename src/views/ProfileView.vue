@@ -7,8 +7,10 @@
     <form class="form" @submit.prevent="onClick">
       <div class="input-field">
         <input id="description" type="text" v-model="name" />
-        <label for="description">Имя</label>
-        <span class="helper-text invalid" v-if="v$.$error">Name*</span>
+        <label for="description">{{ $filters.locolizeFilter("Name") }}</label>
+        <span class="helper-text invalid" v-if="v$.$error"
+          >{{ $filters.locolizeFilter("Name") }}*</span
+        >
       </div>
       <div class="switch" style="margin-bottom: 1.5rem">
         <label>
@@ -19,7 +21,7 @@
         </label>
       </div>
       <button class="btn waves-effect waves-light" type="submit">
-        Обновить
+        {{ $filters.locolizeFilter("UpdateBtn") }}
         <i class="material-icons right">send</i>
       </button>
     </form>
@@ -32,6 +34,9 @@ import { useVuelidate } from "@vuelidate/core";
 import { mapGetters } from "vuex";
 
 export default {
+  metaInfo: {
+    title: "Profile",
+  },
   name: "profile-view",
   data() {
     return {

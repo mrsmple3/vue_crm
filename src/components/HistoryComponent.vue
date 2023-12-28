@@ -3,11 +3,11 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Сумма</th>
-        <th>Дата</th>
-        <th>Категория</th>
-        <th>Тип</th>
-        <th>Открыть</th>
+        <th>{{ $filters.locolizeFilter("Amount") }}</th>
+        <th>{{ $filters.locolizeFilter("Date") }}</th>
+        <th>{{ $filters.locolizeFilter("Category") }}</th>
+        <th>{{ $filters.locolizeFilter("Type") }}</th>
+        <th>{{ $filters.locolizeFilter("Open") }}</th>
       </tr>
     </thead>
 
@@ -24,7 +24,7 @@
         </td>
         <td>
           <button
-            v-tooltip="'Посмотреть запись'"
+            v-tooltip="$filters.locolizeFilter('ViewRecording')"
             class="btn-small btn"
             @click="$router.push('/detail/' + record.id)"
           >

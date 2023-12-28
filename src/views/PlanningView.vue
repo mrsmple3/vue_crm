@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Планирование</h3>
+      <h3>{{ $filters.locolizeFilter("Planning") }}</h3>
       <h4>{{ $filters.currency(info.bill, "RUB") }}</h4>
     </div>
     <loader-component v-if="loading" />
@@ -31,7 +31,11 @@
 <script>
 import { mapGetters } from "vuex";
 import currency from "@/filters/currency.filter";
+
 export default {
+  metaInfo: {
+    title: "Planning",
+  },
   name: "planning",
   data() {
     return {
@@ -59,7 +63,9 @@ export default {
         percent < 60 ? "green" : percent < 100 ? "yellow" : "red";
       const tooltipValue = cat.limit - spend;
       const tooltip = `${
-        tooltipValue < 0 ? "Привышение на" : "Осталось"
+        tooltipValue < 0
+          ? this.$filters.locolizeFilter("ExceedingBy")
+          : this.$filters.locolizeFilter("Left")
       } ${currency(Math.abs(tooltipValue))}`;
       return {
         ...cat,

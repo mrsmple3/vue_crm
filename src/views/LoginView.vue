@@ -1,7 +1,9 @@
 <template>
   <form class="card auth-card" @submit.prevent="submitHandler">
     <div class="card-content">
-      <span class="card-title">Домашняя бухгалтерия</span>
+      <span class="card-title">{{
+        $filters.locolizeFilter("HomeAccounting")
+      }}</span>
       <div class="input-field">
         <input id="email" type="text" v-model.trim="email" />
         <label for="email">Email</label>
@@ -9,9 +11,9 @@
       </div>
       <div class="input-field">
         <input id="password" type="password" v-model.trim="password" />
-        <label for="password">Пароль</label>
+        <label for="password">{{ $filters.locolizeFilter("Password") }}</label>
         <small class="helper-text invalid" v-if="v$.password.$error"
-          >Password* должен содержать {{ password.length }}/6
+          >Password* {{ password.length }}/6
         </small>
       </div>
     </div>
@@ -25,7 +27,9 @@
 
       <p class="center">
         Нет аккаунта?
-        <router-link to="/registrate">Зарегистрироваться</router-link>
+        <router-link to="/registrate">{{
+          $filters.locolizeFilter("Registrate")
+        }}</router-link>
       </p>
     </div>
   </form>
@@ -38,6 +42,9 @@ import messages from "@/utils/messages";
 import { useStore } from "vuex";
 
 export default {
+  metaInfo: {
+    title: "Login",
+  },
   name: "login",
   data() {
     return {

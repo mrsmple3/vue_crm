@@ -1,12 +1,10 @@
 import store from "@/store";
+import ruRU from "@/locales/ruRu.json";
+import enUS from "@/locales/enUS.json";
 
 const locales = {
-  "ru-RU": {
-    ProfileTitle: "Профиль",
-  },
-  "en-US": {
-    ProfileTitle: "Profile",
-  },
+  "ru-RU": ruRU,
+  "en-US": enUS,
 };
 
 export default function locolizeFilter(key) {

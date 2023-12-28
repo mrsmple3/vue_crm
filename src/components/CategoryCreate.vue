@@ -2,13 +2,13 @@
   <div class="col s12 m6">
     <div>
       <div class="page-subtitle">
-        <h4>Создать</h4>
+        <h4>{{ $filters.locolizeFilter("Create") }}</h4>
       </div>
 
       <form @submit.prevent="submitHandler">
         <div class="input-field">
           <input id="name" type="text" v-model="title" />
-          <label for="name">Название</label>
+          <label for="name">{{ $filters.locolizeFilter("Name") }}</label>
           <span class="helper-text invalid" v-if="v$.title.$error"
             >Введите название</span
           >
@@ -16,14 +16,14 @@
 
         <div class="input-field">
           <input id="limit" type="number" v-model.number="limit" />
-          <label for="limit">Лимит</label>
+          <label for="limit">{{ $filters.locolizeFilter("Limit") }}</label>
           <span class="helper-text invalid" v-if="v$.limit.$error"
             >Минимальная величина {{ v$.limit.minValue.$params.min }}
           </span>
         </div>
 
         <button class="btn waves-effect waves-light" type="submit">
-          Создать
+          {{ $filters.locolizeFilter("Category") }}
           <i class="material-icons right">send</i>
         </button>
       </form>
@@ -69,7 +69,7 @@ export default {
         this.title = "";
         this.limit = 100;
         this.v$.$reset();
-        this.$message("Категория была создана");
+        this.$message(this.$filters.locolizeFilter("KategoryHasKreated"));
         this.$emit("created", category);
       } catch (error) {}
     },

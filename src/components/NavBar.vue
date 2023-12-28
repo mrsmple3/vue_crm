@@ -22,13 +22,15 @@
           <ul id="dropdown" class="dropdown-content" style="min-width: 10em">
             <li>
               <router-link to="/profile" class="black-text">
-                <i class="material-icons">account_circle</i>Профиль
+                <i class="material-icons">account_circle</i
+                >{{ $filters.locolizeFilter("ProfileTitle") }}
               </router-link>
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
               <a href="#" class="black-text" @click.prevent="logout">
-                <i class="material-icons">assignment_return</i>Выйти
+                <i class="material-icons">assignment_return</i
+                >{{ $filters.locolizeFilter("Logout") }}
               </a>
             </li>
           </ul>

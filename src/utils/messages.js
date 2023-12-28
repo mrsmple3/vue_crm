@@ -1,3 +1,5 @@
+import locolizeFilter from "@/filters/locolize.filter";
+
 export default {
   logout: "Вы вышли из системы",
   login: "Для начала зайдите в систему",

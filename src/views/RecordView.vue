@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Новая запись</h3>
+      <h3>{{ $filters.locolizeFilter("NewRecord") }}</h3>
     </div>
     <loader-component v-if="loading" />
 
@@ -17,7 +17,7 @@
             {{ c.title }}
           </option>
         </select>
-        <label>Выберите категорию</label>
+        <label>{{ $filters.locolizeFilter("SelectCategory") }}</label>
       </div>
 
       <p>
@@ -29,7 +29,7 @@
             value="income"
             v-model="type"
           />
-          <span>Доход</span>
+          <span>{{ $filters.locolizeFilter("Income") }}</span>
         </label>
       </p>
 
@@ -42,28 +42,31 @@
             value="outcome"
             v-model="type"
           />
-          <span>Расход</span>
+          <span>{{ $filters.locolizeFilter("Outcome") }}</span>
         </label>
       </p>
 
       <div class="input-field">
         <input id="amount" type="number" v-model.number="amount" />
-        <label for="amount">Сумма</label>
+        <label for="amount">{{ $filters.locolizeFilter("Amount") }}</label>
         <span class="helper-text invalid" v-if="v$.amount.$error"
-          >Минимальная сумма расходов {{ v$.amount.minValue.$params.min }}</span
+          >{{ $filters.locolizeFilter("MinValueOutcomes") }}
+          {{ v$.amount.minValue.$params.min }}</span
         >
       </div>
 
       <div class="input-field">
         <input id="description" type="text" v-model="description" />
-        <label for="description">Описание</label>
-        <span class="helper-text invalid" v-if="v$.description.$error"
-          >Введите описание</span
-        >
+        <label for="description">{{
+          $filters.locolizeFilter("Description")
+        }}</label>
+        <span class="helper-text invalid" v-if="v$.description.$error">{{
+          $filters.locolizeFilter("EnterDesciption")
+        }}</span>
       </div>
 
       <button class="btn waves-effect waves-light" type="submit">
-        Создать
+        {{ $filters.locolizeFilter("Create") }}
         <i class="material-icons right">send</i>
       </button>
     </form>
@@ -138,14 +141,16 @@ export default {
               ? this.info.bill + this.amount
               : this.info.bill - this.amount;
           await this.$store.dispatch("updateInfo", { bill });
-          this.$message("Запись успешно создано");
+          this.$message(this.$filters.locolizeFilter("RecordUpdated"));
           this.v$.$reset();
           this.amount = 1;
           this.description = "";
         } catch (error) {}
       } else {
         this.$message(
-          `Недостаточно средств на счете (${this.amount - this.info.bill})`
+          `${this.$filters.locolizeFilter("InsufficientFunds")} (${
+            this.amount - this.info.bill
+          })`
         );
       }
     },

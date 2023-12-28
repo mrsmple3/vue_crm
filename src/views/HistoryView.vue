@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>История записей</h3>
+      <h3>{{ $filters.locolizeFilter("RecordHistory") }}</h3>
     </div>
 
     <div class="history-chart">
@@ -19,8 +19,8 @@
     v-model="page"
     :page-count="pageCount"
     :click-handler="pageChangeHandler"
-    :prev-text="'Назад'"
-    :next-text="'Вперед'"
+    :prev-text="'<'"
+    :next-text="'>'"
     :container-class="'pagination'"
     :page-class="'waves-effect'"
   >
@@ -31,6 +31,9 @@
 import Paginate from "vuejs-paginate-next";
 import paginationMixin from "@/mixin/pagination.mixin";
 export default {
+  metaInfo: {
+    title: "Histrory",
+  },
   name: "history",
   components: {
     paginate: Paginate,
@@ -39,8 +42,8 @@ export default {
   data() {
     return {
       loading: true,
-      records: [],
-    };
+        records: [],
+      };
   },
   async mounted() {
     this.records = await this.$store.dispatch("fetchRecords");
